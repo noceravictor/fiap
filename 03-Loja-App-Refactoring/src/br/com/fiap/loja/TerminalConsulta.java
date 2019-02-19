@@ -4,13 +4,18 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 import br.com.fiap.loja.bo.EstoqueBO;
 import br.com.fiap.loja.singleton.LojaSingleton;
 import br.com.fiap.loja.to.ProdutoTO;
 
 public class TerminalConsulta {
 
+	private static Logger log = Logger.getLogger(TerminalConsulta.class);
+	
 	public static void main(String[] args) {
+		log.warn("Início da aplicação");
 		Scanner sc = new Scanner(System.in);
 
 		// Data atual
@@ -32,12 +37,15 @@ public class TerminalConsulta {
 			
 			if (to != null)
 				System.out.println(to);
-			else
+			else {
 				System.out.println("Produto não encontrado!\n");
+				log.error("Código não existente");
+			}
 			
 		} while (codigo != 0);
 		
 		sc.close();
+		log.warn("Final da aplicação");
 	}
 
 }
